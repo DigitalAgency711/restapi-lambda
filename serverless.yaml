@@ -1,0 +1,25 @@
+service: restapi-lambda
+
+plugins:
+  - serverless-plugin-typescript
+  - serverless-plugin-optimize
+  - serverless-offline
+  - serverless-jetpack
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  region: us-east-1
+  profile: default
+
+functions:
+  main:
+    handler: dist/serverless.handler
+    events:
+      - http:
+          method: any
+          path: /{any+}
+
+custom:
+  serverless-offline:
+    noPrependStageInUrl: true
